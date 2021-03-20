@@ -2,3 +2,36 @@
 // Ծրագիրը աշխատացնել homework4Eng.txt համար:
 
 const fs = require('fs');
+const config = {
+    a: "ա",
+    b: "բ",
+    g: "գ",
+    d: "դ",
+    e: "ե",
+    z: "զ",
+    t: "տ",
+    c: "ց",
+    h: "հ",
+    o: "օ",
+    u:"ու",
+    j:"ջ",
+    y:"յ",
+    m:"մ",
+    n:"ն",
+    s:"ս",
+    r:"ռ",
+    i:"ի",
+    p:"պ",
+    f:"ֆ",
+    q:"ք",
+    k:"կ"
+};
+const readStream = fs.createReadStream('homework4Eng.txt',{
+    highWaterMark : 1
+});
+const writeStream = fs.createWriteStream('homework4Arm.txt');
+
+readStream.on('data',chunk=>{
+    let armLetter = (chunk.toString().toUpperCase() == chunk) ? config[chunk.toString().toLowerCase()]?.toUpperCase() : config[chunk] || chunk;
+    writeStream.write(armLetter);
+});
