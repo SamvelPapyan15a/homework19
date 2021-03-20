@@ -24,14 +24,17 @@ const config = {
     p:"պ",
     f:"ֆ",
     q:"ք",
-    k:"կ"
+    k:"կ",
+    x:"Խ",
+    v:"վ"
 };
 const readStream = fs.createReadStream('homework4Eng.txt',{
+    encoding:"utf-8",
     highWaterMark : 1
 });
 const writeStream = fs.createWriteStream('homework4Arm.txt');
 
 readStream.on('data',chunk=>{
-    let armLetter = (chunk.toString().toUpperCase() == chunk) ? config[chunk.toString().toLowerCase()]?.toUpperCase() : config[chunk] || chunk;
+    let armLetter = (chunk.toUpperCase() == chunk) ? config[chunk.toLowerCase()]?.toUpperCase() : config[chunk] || chunk;
     writeStream.write(armLetter);
 });
